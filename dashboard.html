@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Health Dashboard</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #e6f2ff, #ffffff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .dashboard-container {
+        background: #ffffff;
+        padding: 30px 40px;
+        max-width: 650px;
+        width: 90%;
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        text-align: center;
+      }
+
+      h1 {
+        color: #003566;
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        color: #555;
+        margin-bottom: 25px;
+      }
+
+      .card {
+        background: #f4f9ff;
+        border-left: 6px solid #1e90ff;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: left;
+        font-size: 18px;
+      }
+
+      .card p {
+        margin: 10px 0;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #1e90ff;
+      }
+
+      .no-data {
+        font-size: 18px;
+        color: #b00020;
+        background: #ffecec;
+        padding: 15px;
+        border-radius: 8px;
+      }
+
+      .footer-text {
+        margin-top: 25px;
+        font-size: 16px;
+        color: #444;
+      }
+
+      a {
+        display: inline-block;
+        margin-top: 18px;
+        font-size: 18px;
+        text-decoration: none;
+        color: #fff;
+        background: #1e90ff;
+        padding: 12px 22px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      a:hover {
+        background: #0b6fc2;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="dashboard-container">
+      <h1>📊 Health Dashboard</h1>
+      <p class="subtitle">
+        Your personalized health summary based on the latest AI-powered health
+        checkup.
+      </p>
+
+      <div id="data"></div>
+
+      <p class="footer-text">
+        This dashboard helps elderly users and caregivers easily understand
+        health risks and prepare better for doctor consultations.
+      </p>
+
+      <a href="report.html">📄 View & Download Health Report</a>
+    </div>
+
+    <script>
+      const d = JSON.parse(localStorage.getItem("lastHealthResult"));
+
+      document.getElementById("data").innerHTML = d
+        ? `
+        <div class="card">
+          <p><b>🩺 Condition Checked:</b> <span class="highlight">${
+            d.type
+          }</span></p>
+          <p><b>⚠️ Risk Level:</b> <span class="highlight">${
+            d.risk_level
+          }</span></p>
+          <p><b>📈 Confidence Score:</b> ${(d.confidence * 100).toFixed(1)}%</p>
+          <p><b>🧮 Probability:</b> ${(d.probability_positive * 100).toFixed(
+            1
+          )}%</p>
+          <p><b>⏰ Checked On:</b> ${d.time}</p>
+        </div>
+      `
+        : `
+        <div class="no-data">
+          No health data available yet.  
+          Please complete a Diabetes or Heart Disease checkup to view insights.
+        </div>
+      `;
+    </script>
+  </body>
+</html>
