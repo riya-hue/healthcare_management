@@ -2,134 +2,128 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Health Dashboard</title>
-
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom, #e6f2ff, #ffffff);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-
-      .dashboard-container {
-        background: #ffffff;
-        padding: 30px 40px;
-        max-width: 650px;
-        width: 90%;
-        border-radius: 14px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-        text-align: center;
-      }
-
-      h1 {
-        color: #003566;
-        font-size: 32px;
-        margin-bottom: 10px;
-      }
-
-      .subtitle {
-        font-size: 18px;
-        color: #555;
-        margin-bottom: 25px;
-      }
-
-      .card {
-        background: #f4f9ff;
-        border-left: 6px solid #1e90ff;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: left;
-        font-size: 18px;
-      }
-
-      .card p {
-        margin: 10px 0;
-      }
-
-      .highlight {
-        font-weight: bold;
-        color: #1e90ff;
-      }
-
-      .no-data {
-        font-size: 18px;
-        color: #b00020;
-        background: #ffecec;
-        padding: 15px;
-        border-radius: 8px;
-      }
-
-      .footer-text {
-        margin-top: 25px;
-        font-size: 16px;
-        color: #444;
-      }
-
-      a {
-        display: inline-block;
-        margin-top: 18px;
-        font-size: 18px;
-        text-decoration: none;
-        color: #fff;
-        background: #1e90ff;
-        padding: 12px 22px;
-        border-radius: 8px;
-        font-weight: bold;
-      }
-
-      a:hover {
-        background: #0b6fc2;
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heart Disease Checkup</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+    <script src="config.js"></script>
   </head>
-
   <body>
-    <div class="dashboard-container">
-      <h1>📊 Health Dashboard</h1>
-      <p class="subtitle">
-        Your personalized health summary based on the latest AI-powered health
-        checkup.
-      </p>
+    <!-- Header -->
+    <header>
+      <a href="index.html" class="logo">
+        <i class="bx bxs-basket"></i>EL Care
+      </a>
 
-      <div id="data"></div>
+      <div class="bx bx-menu" id="menu-icon"></div>
 
-      <p class="footer-text">
-        This dashboard helps elderly users and caregivers easily understand
-        health risks and prepare better for doctor consultations.
-      </p>
+      <ul class="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+      </ul>
 
-      <a href="report.html">📄 View & Download Health Report</a>
-    </div>
+      <div style="display: flex; align-items: center; gap: 20px">
+        <a href="blog.html" class="profile">
+          <img
+            src="https://img.icons8.com/color/48/000000/blog.png"
+            alt="Blog"
+            style="width: 32px; height: 32px"
+          />
+          <span>Blogs</span>
+        </a>
 
-    <script>
-      const d = JSON.parse(localStorage.getItem("lastHealthResult"));
+        <a href="health.html" class="profile">
+          <img src="logo.jpg" alt="Profile" />
+          <span>Health Checkup</span>
+        </a>
+      </div>
+    </header>
 
-      document.getElementById("data").innerHTML = d
-        ? `
-        <div class="card">
-          <p><b>🩺 Condition Checked:</b> <span class="highlight">${
-            d.type
-          }</span></p>
-          <p><b>⚠️ Risk Level:</b> <span class="highlight">${
-            d.risk_level
-          }</span></p>
-          <p><b>📈 Confidence Score:</b> ${(d.confidence * 100).toFixed(1)}%</p>
-          <p><b>🧮 Probability:</b> ${(d.probability_positive * 100).toFixed(
-            1
-          )}%</p>
-          <p><b>⏰ Checked On:</b> ${d.time}</p>
-        </div>
-      `
-        : `
-        <div class="no-data">
-          No health data available yet.  
-          Please complete a Diabetes or Heart Disease checkup to view insights.
-        </div>
-      `;
-    </script>
+    <!-- Health Section -->
+    <section class="home">
+      <div class="home-content">
+        <span class="tagline">AI Health Check</span>
+        <h1 class="title">🩺 Heart Disease Risk Assessment</h1>
+        <p class="description">
+          Enter your health details below to receive an instant AI-based heart
+          disease risk analysis.
+        </p>
+
+        <form id="heartForm" class="health-profile">
+          <input name="age" type="number" placeholder="Age" required />
+          <input
+            name="sex"
+            type="number"
+            placeholder="Sex (1 = Male, 0 = Female)"
+            required
+          />
+          <input
+            name="cp"
+            type="number"
+            placeholder="Chest Pain Type"
+            required
+          />
+          <input
+            name="trestbps"
+            type="number"
+            placeholder="Resting Blood Pressure"
+            required
+          />
+          <input name="chol" type="number" placeholder="Cholesterol" required />
+          <input
+            name="fbs"
+            type="number"
+            placeholder="Fasting Blood Sugar"
+            required
+          />
+          <input
+            name="restecg"
+            type="number"
+            placeholder="ECG Result"
+            required
+          />
+          <input
+            name="thalach"
+            type="number"
+            placeholder="Max Heart Rate"
+            required
+          />
+          <input
+            name="exang"
+            type="number"
+            placeholder="Exercise Induced Angina"
+            required
+          />
+          <input
+            name="oldpeak"
+            type="number"
+            step="0.1"
+            placeholder="Oldpeak"
+            required
+          />
+          <input name="slope" type="number" placeholder="Slope" required />
+          <input
+            name="ca"
+            type="number"
+            placeholder="Number of Major Vessels"
+            required
+          />
+          <input name="thal" type="number" placeholder="Thal" required />
+
+          <button type="submit" class="submit-btn">
+            Analyze Heart Disease
+          </button>
+        </form>
+
+        <pre id="result"></pre>
+        <a href="dashboard.html" class="btn">➡ View Health Dashboard</a>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
   </body>
 </html>
